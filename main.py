@@ -9,12 +9,12 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from flask_gravatar import Gravatar
-# import os
-# from dotenv import load_dotenv
+import os
 
-# load_dotenv()
+
 app = Flask(__name__)
-# app.config['SECRET_KEY'] = os.getenv('flask_secret_key')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL",  "sqlite:///blog.db")
 ckeditor = CKEditor(app)
 Bootstrap(app)
 Base = declarative_base()
