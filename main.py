@@ -9,12 +9,12 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from flask_gravatar import Gravatar
-import os
-from dotenv import load_dotenv
+# import os
+# from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv('flask_secret_key')
+# app.config['SECRET_KEY'] = os.getenv('flask_secret_key')
 ckeditor = CKEditor(app)
 Bootstrap(app)
 Base = declarative_base()
@@ -151,7 +151,8 @@ def logout():
 def show_post(post_id):
     comment_form = CommentForm()
     requested_post = BlogPost.query.get(post_id)
-    comments_to_post = {comment: User.query.get(comment.author_id) for comment in Comment.query.filter_by(post_id=post_id)}
+    comments_to_post = {comment: User.query.get(comment.author_id) for comment in
+                        Comment.query.filter_by(post_id=post_id)}
     print(comments_to_post)
     if comment_form.validate_on_submit():
         comment = Comment(
@@ -228,3 +229,4 @@ def delete_post(post_id):
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
+    # app.run()
